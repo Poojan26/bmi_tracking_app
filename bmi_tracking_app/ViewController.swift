@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class ViewController: UIViewController {
     
@@ -80,6 +82,7 @@ class ViewController: UIViewController {
     
     // Reset button
     @IBAction func ResetButton(_ sender: UIButton) {
+        NameText.text = ""
         AgeText.text = ""
         GenderText.text = ""
         Weighttext.text = ""
@@ -98,8 +101,13 @@ class ViewController: UIViewController {
             let time = dateFormatter.string(from: date)
             dateFormatter.dateFormat = "dd-MM-yyyy"
             let dateString = dateFormatter.string(from: date)
-            var details = [Details(weight:Weighttext.text!,bmi: BMILabel.text!,date: dateString, height: HeightText.text!)]
+           
             
+            let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/")
+            var db_id = databaseRef.child("Profile").childByAutoId()
+            db_id.setValue(["Name": NameText.text!,"Age":AgeText.text!,"Gender":GenderText.text!,"Weight":Weighttext.text!, "Bmi": BMILabel.text!, "Height": HeightText.text!,"date":dateString])
+            
+            var details = [Details(weight:Weighttext.text!,bmi: BMILabel.text!,date: dateString, height: HeightText.text!,id: db_id.key!)]
             let destination = segue.destination as! TrackingTableController
             destination.details = details
         }

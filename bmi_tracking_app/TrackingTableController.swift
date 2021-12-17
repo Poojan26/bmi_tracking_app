@@ -6,18 +6,39 @@
 //
 
 import UIKit
+import Firebase
+import FirebaseDatabase
 
 class TrackingTableController: UIViewController,UITabBarDelegate,UITableViewDataSource {
     
   
+    @IBOutlet weak var TableView: UITableView!
     var details = [Details]()
-    //var details = [
-  //        Details(weight:"25",bmi:"19",date: "12/11/98",height: "23")]
-
+    
+    // Declaring handle to read the database data
+    var databaseHandle:FirebaseDatabase.DatabaseHandle?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
+        let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile")
+        databaseRef.observe(.value, with: {(snapshot) in
+            
+//            for Profile in snapshot.children.allObjects as![DataSnapshot]{
+//                let object = Profile.value as? [String:Any]
+//                let weight = Profile.value["Weight"]
+//                let height = Profile.value["Height"]
+//                let bmi = Profile.value["bmi"]
+//                let date = Profile.value["date"]
+//
+//                let new_details = Details(weight: weight, bmi: bmi, date: date, height: height)
+//                self.details.append(new_details)
+//
+//            }
+            //self.details = snapshot.children.allObjects as! [Details]
+            
+        })
+        
         // Do any additional setup after loading the view.
     }
     

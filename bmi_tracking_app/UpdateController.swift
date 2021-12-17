@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseDatabase
 
 class UpdateController: UIViewController {
     
@@ -14,12 +15,9 @@ class UpdateController: UIViewController {
     @IBOutlet weak var DateLabel: UIDatePicker!
     @IBOutlet weak var typePicker: UISegmentedControl!
     @IBOutlet weak var BMILabel: UITextField!
+    @IBOutlet weak var IdLabel: UILabel!
     
-    var details = [
-        Details(weight:"25",bmi:"19",date: "12/11/98",height: "23"),
-        Details(weight:"25",bmi:"19",date:"12/11/98",height: "32"),
-        Details(weight:"25",bmi:"19",date:"12/11/98",height: "22")
-    ]
+    var details = [Details]()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,6 +25,7 @@ class UpdateController: UIViewController {
         let selected_row = details[0]
         WeightLabel.text = selected_row.weight
         HeightLabel.text = selected_row.height
+        IdLabel.text = selected_row.id
         
         // Converting string to date
         let dateFormatter = DateFormatter()
@@ -62,7 +61,7 @@ class UpdateController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "updated"{
+        //if segue.identifier == "updated"{
             //var date = "12/16/21"
             var dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
@@ -71,9 +70,17 @@ class UpdateController: UIViewController {
             let time = dateFormatter.string(from: date)
             dateFormatter.dateFormat = "dd-MM-yyyy"
             let dateString = dateFormatter.string(from: date)
-            var details = [Details(weight:WeightLabel.text!,bmi: BMILabel.text!,date: dateString, height: HeightLabel.text!)]
+            var details = [Details(weight:WeightLabel.text!,bmi: BMILabel.text!,date: dateString, height: HeightLabel.text!,id: IdLabel.text!)]
             
+        
+            var id = IdLabel.text!
+        
+            // Updating database
+            let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile/"+id)
+            databaseRef.updateChildValues(["Weight":WeightLabel.text!, "bmi":BMILabel.text!, "date":dateString])
             let destination = segue.destination as! TrackingTableController
             destination.details.append(contentsOf: details)
-        }
+        
+        
+        //}
     }}

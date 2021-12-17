@@ -12,5 +12,6 @@ struct Details{
     let bmi: String
     let date: String
     let height: String
+    let id: String
 }
 

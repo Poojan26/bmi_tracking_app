@@ -283,7 +283,7 @@
             <objects>
                 <viewController id="14H-cc-SHg" customClass="UpdateController" customModule="bmi_tracking_app" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UA5-sK-BWF">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your BMI" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ8-3Q-z2j">
@@ -386,6 +386,13 @@
                                     <segment title="Metric"/>
                                 </segments>
                             </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Rl-ep-vz4">
+                                <rect key="frame" x="268" y="549" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="tHk-zF-3Tf"/>
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
@@ -395,6 +402,7 @@
                         <outlet property="BMILabel" destination="vDm-bK-o1L" id="Nvo-9v-VAC"/>
                         <outlet property="DateLabel" destination="92e-aS-3yf" id="Ibv-O3-mjI"/>
                         <outlet property="HeightLabel" destination="aof-eh-xUG" id="VxW-TW-Hny"/>
+                        <outlet property="IdLabel" destination="4Rl-ep-vz4" id="CTR-BW-cew"/>
                         <outlet property="WeightLabel" destination="vKj-be-Pkf" id="MrF-lo-xXU"/>
                         <outlet property="typePicker" destination="CNR-vM-J7N" id="wwV-Mo-DvA"/>
                     </connections>
@@ -423,8 +431,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="BHL-B8-Xhg"/>
-        <segue reference="Mr4-GF-5a3"/>
+        <segue reference="hJ1-ai-TLC"/>
     </inferredMetricsTieBreakers>
     <resources>
         <systemColor name="opaqueSeparatorColor">
