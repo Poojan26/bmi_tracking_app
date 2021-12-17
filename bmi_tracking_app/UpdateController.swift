@@ -1,7 +1,12 @@
 //
 //  UpdateController.swift
 //  bmi_tracking_app
-//
+
+// Name: Poojan Patel
+// Student ID- 301228811
+// Course: MAPD 714
+//  ViewController.swift
+//  Creating a BMI calculator app with multiple screens
 //  Created by Poojan on 12/17/21.
 //
 
@@ -10,12 +15,14 @@ import FirebaseDatabase
 
 class UpdateController: UIViewController {
     
+    // Field outlets
     @IBOutlet weak var WeightLabel: UITextField!
     @IBOutlet weak var HeightLabel: UILabel!
     @IBOutlet weak var DateLabel: UIDatePicker!
     @IBOutlet weak var typePicker: UISegmentedControl!
     @IBOutlet weak var BMILabel: UITextField!
     @IBOutlet weak var IdLabel: UILabel!
+    
     
     var details = [Details]()
     override func viewDidLoad() {
@@ -35,6 +42,8 @@ class UpdateController: UIViewController {
     }
     
     @IBAction func UpdateBMI(_ sender: UIButton) {
+        
+        // Storing label values in variables
         var weight  = Float(WeightLabel.text!) ?? 0
         var height = Float(HeightLabel.text!) ?? 0
         var type = typePicker.titleForSegment(at: typePicker.selectedSegmentIndex)
@@ -54,15 +63,18 @@ class UpdateController: UIViewController {
         }
     }
     
+    // Update record button function
     @IBAction func UpdateTracker(_ sender: UIButton) {
         
         // Calling method from Trackingtablecontroller to create a new record with updated values
         
     }
     
+    // Segue for delete and update
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         var id = IdLabel.text!
+        // Check if update button is clicked
         if segue.identifier == "updated"{
             //var date = "12/16/21"
             var dateFormatter = DateFormatter()
@@ -75,15 +87,16 @@ class UpdateController: UIViewController {
             var details = [Details(weight:WeightLabel.text!,bmi: BMILabel.text!,date: dateString, height: HeightLabel.text!,id: IdLabel.text!)]
             
         
-           
-        
             // Updating database
             let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile/"+id)
             databaseRef.updateChildValues(["Weight":WeightLabel.text!, "Bmi":BMILabel.text!, "date":dateString])
+            
+            // Add values to table
             let destination = segue.destination as! TrackingTableController
             destination.details.append(contentsOf: details)
         }
         
+        // Check if delete button is clicked
         if segue.identifier == "deleted"{
             
             // Delete entry from database

@@ -1,7 +1,11 @@
 //
 //  ViewController.swift
 //  bmi_tracking_app
-//
+// Name: Poojan Patel
+// Student ID- 301228811
+// Course: MAPD 714
+//  ViewController.swift
+//  Creating a BMI calculator app with multiple screens
 //  Created by Poojan on 12/16/21.
 //
 
@@ -11,6 +15,7 @@ import FirebaseDatabase
 
 class ViewController: UIViewController {
     
+    // Text field outlets
     @IBOutlet weak var NameText: UITextField!
     @IBOutlet weak var AgeText: UITextField!
     @IBOutlet weak var GenderText: UITextField!
@@ -22,9 +27,10 @@ class ViewController: UIViewController {
     @IBOutlet weak var Typepick: UISegmentedControl!
     @IBOutlet weak var ResetButton: UIButton!
     
-    
+    // Bmi and analysis labels
     @IBOutlet weak var AnalysisLabel: UILabel!
     @IBOutlet weak var BMILabel: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -90,23 +96,28 @@ class ViewController: UIViewController {
         BMILabel.text = ""
     }
     
-    // Done Button
+    // Done Button [Segue method]
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "navigate"{
             //var date = "12/16/21"
             var dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
             
+            // Fetching current date and time
             let date = Date()
             let time = dateFormatter.string(from: date)
             dateFormatter.dateFormat = "dd-MM-yyyy"
+            
+            // Converting it to string so it can be passed to other controller
             let dateString = dateFormatter.string(from: date)
            
             
+            // Creating a database entry
             let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/")
             var db_id = databaseRef.child("Profile").childByAutoId()
             db_id.setValue(["Name": NameText.text!,"Age":AgeText.text!,"Gender":GenderText.text!,"Weight":Weighttext.text!, "Bmi": BMILabel.text!, "Height": HeightText.text!,"date":dateString])
             
+            // Passing our list to table view controller with segue
             var details = [Details(weight:Weighttext.text!,bmi: BMILabel.text!,date: dateString, height: HeightText.text!,id: db_id.key!)]
             let destination = segue.destination as! TrackingTableController
             destination.details = details
