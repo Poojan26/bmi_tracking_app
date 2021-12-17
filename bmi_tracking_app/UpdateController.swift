@@ -77,7 +77,7 @@ class UpdateController: UIViewController {
         
             // Updating database
             let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile/"+id)
-            databaseRef.updateChildValues(["Weight":WeightLabel.text!, "bmi":BMILabel.text!, "date":dateString])
+            databaseRef.updateChildValues(["Weight":WeightLabel.text!, "Bmi":BMILabel.text!, "date":dateString])
             let destination = segue.destination as! TrackingTableController
             destination.details.append(contentsOf: details)
         
