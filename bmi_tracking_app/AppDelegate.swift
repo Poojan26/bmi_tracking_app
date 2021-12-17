@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  bmi_tracking_app
 //
-//  Created by Jay on 12/15/21.
+//  Created by Poojan on 12/16/21.
 //
 
 import UIKit

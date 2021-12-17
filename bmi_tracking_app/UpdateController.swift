@@ -2,7 +2,7 @@
 //  UpdateController.swift
 //  bmi_tracking_app
 //
-//  Created by Jay on 12/17/21.
+//  Created by Poojan on 12/17/21.
 //
 
 import UIKit
@@ -61,7 +61,9 @@ class UpdateController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //if segue.identifier == "updated"{
+        
+        var id = IdLabel.text!
+        if segue.identifier == "updated"{
             //var date = "12/16/21"
             var dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "HH:mm:ss"
@@ -73,14 +75,21 @@ class UpdateController: UIViewController {
             var details = [Details(weight:WeightLabel.text!,bmi: BMILabel.text!,date: dateString, height: HeightLabel.text!,id: IdLabel.text!)]
             
         
-            var id = IdLabel.text!
+           
         
             // Updating database
             let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile/"+id)
             databaseRef.updateChildValues(["Weight":WeightLabel.text!, "Bmi":BMILabel.text!, "date":dateString])
             let destination = segue.destination as! TrackingTableController
             destination.details.append(contentsOf: details)
+        }
         
+        if segue.identifier == "deleted"{
+            
+            // Delete entry from database
+            let databaseRef = Database.database().reference(fromURL:"https://bmi-tracking-app-default-rtdb.firebaseio.com/").child("Profile/"+id)
+            databaseRef.removeValue()
+            
+        }
         
-        //}
     }}
