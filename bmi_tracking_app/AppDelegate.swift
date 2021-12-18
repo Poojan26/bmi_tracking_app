@@ -6,7 +6,7 @@
 // Student ID- 301228811
 // Course: MAPD 714
 //  ViewController.swift
-//  Creating a BMI calculator app with multiple screens//
+//  Creating a BMI calculator app with multiple screens
 //  Created by Poojan on 12/16/21.
 //
 

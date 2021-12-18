@@ -38,8 +38,7 @@ class ViewController: UIViewController {
     
     // Button actions
     @IBAction func OnClickCalculate(_ sender: UIButton) {
-        var age  = AgeText.text
-        var gender = GenderText.text
+
         var weight  = Float(Weighttext.text!) ?? 0
         var height = Float(HeightText.text!) ?? 0
         var type = Typepick.titleForSegment(at: Typepick.selectedSegmentIndex)
